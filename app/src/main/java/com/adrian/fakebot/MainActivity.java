@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.adrian.fakebot.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
         }else{
             messageList.add(new Message(idMessage,humanMessage,false));
             idMessage++;
-            int randomPosition= (int)Math.random()*8;
+            Random r= new Random();
+            int randomPosition= r.nextInt(7);
             messageList.add(new Message(idMessage,botAnswers.get(randomPosition),true));
             idMessage++;
             adapter.submitList(messageList);
             binding.messageText.setText("");
+            binding.messagesRecycler.scrollToPosition(idMessage-2);
         }
     }
 }
