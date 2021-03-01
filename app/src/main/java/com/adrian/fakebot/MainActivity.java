@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -59,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
         }else{
             binding.messageEmptyView.setVisibility(View.GONE);
            addUserMessage(humanMessage);
-           addBotMessage();
+           Runnable c= () -> {
+            addBotMessage();
+           };
+            Handler hand=new Handler();
+            hand.postDelayed(c,2000);
         }
     }
 
