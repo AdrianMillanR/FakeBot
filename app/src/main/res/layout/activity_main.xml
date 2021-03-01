@@ -31,6 +31,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/message_text"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Write your message here"
@@ -38,6 +39,7 @@
                 />
 
             <ImageView
+                android:id="@+id/send_message_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_send_message"

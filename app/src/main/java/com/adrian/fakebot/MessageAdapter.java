@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adrian.fakebot.databinding.MessageListItemBinding;
+
 public class MessageAdapter extends ListAdapter<Message, MessageAdapter.MessageViewHolder> {
 
     public static final DiffUtil.ItemCallback<Message> DIFF_CALLBACK =
@@ -33,8 +35,8 @@ public class MessageAdapter extends ListAdapter<Message, MessageAdapter.MessageV
     @NonNull
     @Override
     public MessageAdapter.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.message_list_item,parent,false);
-        return new MessageViewHolder(view);
+        MessageListItemBinding binding= MessageListItemBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new MessageViewHolder(binding);
     }
 
     @Override
@@ -45,16 +47,19 @@ public class MessageAdapter extends ListAdapter<Message, MessageAdapter.MessageV
 
     class MessageViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView messageText;
+        private final MessageListItemBinding binding;
 
-        public MessageViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public MessageViewHolder(@NonNull MessageListItemBinding binding) {
+            super(binding.getRoot());
 
-            messageText=itemView.findViewById(R.id.message_text);
+            this.binding=binding;
+
         }
 
         public void bind(Message message){
-            messageText.setText(String.valueOf(message.getContent()));
+            binding.messageText.setText(String.valueOf(message.getContent()));
+
+            binding.executePendingBindings();
         }
     }
 }
