@@ -19,9 +19,13 @@ public class MainActivity extends AppCompatActivity {
         binding.messagesRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<Message> messageList= new ArrayList<>();
-        messageList.add(new Message("¿Comeré Tacos hoy?", false));
-        messageList.add(new Message("No", true));
-        messageList.add(new Message("¿Viviré eternamente?", false));
-        messageList.add(new Message("Si", true));
+        messageList.add(new Message(1,"¿Comeré Tacos hoy?", false));
+        messageList.add(new Message(2,"No", true));
+        messageList.add(new Message(3,"¿Viviré eternamente?", false));
+        messageList.add(new Message(4,"Si", true));
+
+        MessageAdapter adapter= new MessageAdapter();
+        binding.messagesRecycler.setAdapter(adapter);
+        adapter.submitList(messageList);
     }
 }
