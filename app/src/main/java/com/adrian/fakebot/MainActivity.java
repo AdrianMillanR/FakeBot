@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.adrian.fakebot.databinding.ActivityMainBinding;
@@ -40,8 +41,14 @@ public class MainActivity extends AppCompatActivity {
         //adapter.submitList(messageList);
 
         binding.sendMessageButton.setOnClickListener(v -> {
-            addMessages();
+                addMessages();
         });
+
+        if(messageList.isEmpty()){
+            binding.messageEmptyView.setVisibility(View.VISIBLE);
+        }else{
+            binding.messageEmptyView.setVisibility(View.GONE);
+        }
 
     }
 
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if (humanMessage.isEmpty()){
             Toast.makeText(this,"You must write a message",Toast.LENGTH_SHORT).show();
         }else{
-
+            binding.messageEmptyView.setVisibility(View.GONE);
            addUserMessage(humanMessage);
            addBotMessage();
         }
