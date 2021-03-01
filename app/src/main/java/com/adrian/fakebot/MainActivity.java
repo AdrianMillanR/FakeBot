@@ -50,15 +50,25 @@ public class MainActivity extends AppCompatActivity {
         if (humanMessage.isEmpty()){
             Toast.makeText(this,"You must write a message",Toast.LENGTH_SHORT).show();
         }else{
-            messageList.add(new Message(idMessage,humanMessage,false));
-            idMessage++;
-            Random r= new Random();
-            int randomPosition= r.nextInt(7);
-            messageList.add(new Message(idMessage,botAnswers.get(randomPosition),true));
-            idMessage++;
-            adapter.submitList(messageList);
-            binding.messageText.setText("");
-            binding.messagesRecycler.scrollToPosition(idMessage-2);
+
+           addUserMessage(humanMessage);
+           addBotMessage();
         }
+    }
+
+    public void addUserMessage(String humanMessage){
+        messageList.add(new Message(idMessage,humanMessage,false));
+        idMessage++;
+        adapter.submitList(messageList);
+        binding.messagesRecycler.scrollToPosition(idMessage-2);
+        binding.messageText.setText("");
+    }
+    public void addBotMessage(){
+        Random r= new Random();
+        int randomPosition= r.nextInt(7);
+        messageList.add(new Message(idMessage,botAnswers.get(randomPosition),true));
+        idMessage++;
+        adapter.submitList(messageList);
+        binding.messagesRecycler.scrollToPosition(idMessage-2);
     }
 }

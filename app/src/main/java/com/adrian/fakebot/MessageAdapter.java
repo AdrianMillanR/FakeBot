@@ -1,5 +1,7 @@
 package com.adrian.fakebot;
 
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,13 @@ public class MessageAdapter extends ListAdapter<Message, MessageAdapter.MessageV
         }
 
         public void bind(Message message){
+            if(message.isItsBotMessage()){
+                binding.messageContainer.setBackgroundColor(Color.parseColor("#ebecf3"));
+                binding.messageText.setGravity(Gravity.START);
+            }else{
+                binding.messageContainer.setBackgroundColor(Color.parseColor("#d1e6da"));
+                binding.messageText.setGravity(Gravity.END);
+            }
             binding.messageText.setText(String.valueOf(message.getContent()));
 
             binding.executePendingBindings();
