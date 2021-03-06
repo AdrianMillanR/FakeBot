@@ -1,6 +1,7 @@
 package com.adrian.fakebot;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -39,9 +40,13 @@ public class MainActivity extends AppCompatActivity {
             binding.messageEmptyView.setVisibility(View.VISIBLE);
         }else{
             binding.messageEmptyView.setVisibility(View.GONE);
-            binding.messagesRecycler.scrollToPosition(viewModel.idMessage-2);
+            binding.messagesRecycler.scrollToPosition(viewModel.getIdMessage().getValue()-2);
 
         }
+
+        viewModel.getIdMessage().observe(this, idMessage -> {
+            binding.messagesRecycler.scrollToPosition(idMessage - 2);
+        });
 
     }
 
@@ -62,11 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void addUserMessage(String humanMessage){
         viewModel.addUserMessage(humanMessage);
-        binding.messagesRecycler.scrollToPosition(viewModel.idMessage-2);
         binding.messageText.setText("");
     }
     public void addBotMessage(){
         viewModel.addBotMessage();
-        binding.messagesRecycler.scrollToPosition(viewModel.idMessage-2);
     }
 }
